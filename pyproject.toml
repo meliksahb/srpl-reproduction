@@ -1,0 +1,42 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "srpl-reproduction"
+version = "0.1.0"
+description = "Reproduction of 'Safety Representations for Safer Policy Learning' (SRPL, Mani et al., ICLR 2025) on Safety-Gymnasium."
+readme = "README.md"
+requires-python = ">=3.10"
+license = { text = "MIT" }
+authors = [{ name = "Meliksah Besir" }]
+
+# Only the lightweight dependency needed by the SRPL contribution code
+# (labeling, S2C model utilities) is pinned here so that `pip install -e .`
+# stays fast and never blocks on resolving the heavy RL stack.
+#
+# The full experiment dependencies (omnisafe, safety-gymnasium, torch, ...) are
+# installed separately via the Colab bootstrap / requirements.txt, with exact
+# versions pinned after the Stage 0 environment smoke test.
+dependencies = [
+    "numpy>=1.23",
+]
+
+[project.optional-dependencies]
+# Installed in the training environment (Colab / A4000 box). Versions are
+# pinned in requirements.txt once Stage 0 confirms what installs cleanly.
+experiments = [
+    "torch",
+    "omnisafe",
+    "safety-gymnasium",
+]
+dev = [
+    "pytest>=7.0",
+]
+
+[tool.setuptools]
+packages = ["srpl"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-q"

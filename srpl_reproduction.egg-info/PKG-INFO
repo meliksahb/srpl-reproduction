@@ -1,0 +1,19 @@
+Metadata-Version: 2.4
+Name: srpl-reproduction
+Version: 0.1.0
+Summary: Reproduction of 'Safety Representations for Safer Policy Learning' (SRPL, Mani et al., ICLR 2025) on Safety-Gymnasium.
+Author: Meliksah Besir
+License: MIT
+Requires-Python: >=3.10
+Description-Content-Type: text/markdown
+License-File: LICENSE
+Requires-Dist: numpy>=1.23
+Provides-Extra: experiments
+Requires-Dist: torch; extra == "experiments"
+Requires-Dist: omnisafe; extra == "experiments"
+Requires-Dist: safety-gymnasium; extra == "experiments"
+Provides-Extra: dev
+Requires-Dist: pytest>=7.0; extra == "dev"
+Dynamic: license-file
+
+# srpl-reproduction

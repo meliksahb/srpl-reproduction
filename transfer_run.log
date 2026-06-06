@@ -1,0 +1,28 @@
+nohup: ignoring input
+==================================================================
+ Fig 6 transfer | MAX_PAR=4 THREADS=2 SEEDS='0 1 2'
+ target steps=1000000 | s2c_ckpt=./experiments/transfer/s2c_button1.pt | s2c_input_dim=76
+==================================================================
+[source] reusing existing S2C checkpoint: ./experiments/transfer/s2c_button1.pt
+[start] transfer_seed0
+[start] random_seed0
+[start] base_seed0
+[start] transfer_seed1
+[done ] transfer_seed1
+[start] random_seed1
+[done ] random_seed0
+[start] base_seed1
+[done ] transfer_seed0
+[start] transfer_seed2
+[done ] base_seed0
+[start] random_seed2
+[done ] random_seed1
+[start] base_seed2
+[done ] transfer_seed2
+[done ] base_seed1
+[done ] random_seed2
+[done ] base_seed2
+==================================================================
+ transfer runs complete. next:
+   python scripts/plot_transfer.py --base ./experiments/transfer
+==================================================================

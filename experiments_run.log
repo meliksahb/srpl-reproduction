@@ -1,0 +1,85 @@
+nohup: ignoring input
+==================================================================
+ SRPL full run | MAX_PAR=4 THREADS=2 SEEDS='0 1 2'
+ PPO: 1000000 steps, tasks: PointGoal1 PointButton1
+ OFF: 500000 steps, tasks: PointGoal1 PointButton1, extra: --update-cycle 50 --update-iters 50
+ logs -> ./experiments/full/_logs   markers -> ./experiments/full/_markers
+==================================================================
+Queued 36 runs.
+[start] PPOLag_PointGoal1_sr_seed0 (steps=1000000)
+[start] PPOLag_PointGoal1_sr_seed1 (steps=1000000)
+[start] PPOLag_PointGoal1_sr_seed2 (steps=1000000)
+[start] PPOLag_PointGoal1_no-sr_seed0 (steps=1000000)
+[done ] PPOLag_PointGoal1_no-sr_seed0
+[start] PPOLag_PointGoal1_no-sr_seed1 (steps=1000000)
+[done ] PPOLag_PointGoal1_sr_seed0
+[start] PPOLag_PointGoal1_no-sr_seed2 (steps=1000000)
+[done ] PPOLag_PointGoal1_sr_seed2
+[done ] PPOLag_PointGoal1_sr_seed1
+[start] PPOLag_PointButton1_sr_seed0 (steps=1000000)
+[start] PPOLag_PointButton1_sr_seed1 (steps=1000000)
+[done ] PPOLag_PointGoal1_no-sr_seed1
+[start] PPOLag_PointButton1_sr_seed2 (steps=1000000)
+[done ] PPOLag_PointGoal1_no-sr_seed2
+[start] PPOLag_PointButton1_no-sr_seed0 (steps=1000000)
+[done ] PPOLag_PointButton1_sr_seed1
+[start] PPOLag_PointButton1_no-sr_seed1 (steps=1000000)
+[done ] PPOLag_PointButton1_sr_seed0
+[start] PPOLag_PointButton1_no-sr_seed2 (steps=1000000)
+[done ] PPOLag_PointButton1_sr_seed2
+[start] TD3Lag_PointGoal1_sr_seed0 (steps=500000)
+[done ] PPOLag_PointButton1_no-sr_seed0
+[start] TD3Lag_PointGoal1_sr_seed1 (steps=500000)
+[done ] PPOLag_PointButton1_no-sr_seed1
+[start] TD3Lag_PointGoal1_sr_seed2 (steps=500000)
+[done ] PPOLag_PointButton1_no-sr_seed2
+[start] TD3Lag_PointGoal1_no-sr_seed0 (steps=500000)
+[done ] TD3Lag_PointGoal1_sr_seed1
+[start] TD3Lag_PointGoal1_no-sr_seed1 (steps=500000)
+[done ] TD3Lag_PointGoal1_sr_seed0
+[start] TD3Lag_PointGoal1_no-sr_seed2 (steps=500000)
+[done ] TD3Lag_PointGoal1_sr_seed2
+[start] TD3Lag_PointButton1_sr_seed0 (steps=500000)
+[done ] TD3Lag_PointGoal1_no-sr_seed0
+[start] TD3Lag_PointButton1_sr_seed1 (steps=500000)
+[done ] TD3Lag_PointGoal1_no-sr_seed1
+[start] TD3Lag_PointButton1_sr_seed2 (steps=500000)
+[done ] TD3Lag_PointGoal1_no-sr_seed2
+[start] TD3Lag_PointButton1_no-sr_seed0 (steps=500000)
+[done ] TD3Lag_PointButton1_sr_seed0
+[start] TD3Lag_PointButton1_no-sr_seed1 (steps=500000)
+[done ] TD3Lag_PointButton1_sr_seed1
+[start] TD3Lag_PointButton1_no-sr_seed2 (steps=500000)
+[done ] TD3Lag_PointButton1_sr_seed2
+[start] SACLag_PointGoal1_sr_seed0 (steps=500000)
+[done ] TD3Lag_PointButton1_no-sr_seed0
+[start] SACLag_PointGoal1_sr_seed1 (steps=500000)
+[done ] TD3Lag_PointButton1_no-sr_seed1
+[start] SACLag_PointGoal1_sr_seed2 (steps=500000)
+[done ] TD3Lag_PointButton1_no-sr_seed2
+[start] SACLag_PointGoal1_no-sr_seed0 (steps=500000)
+[done ] SACLag_PointGoal1_sr_seed0
+[start] SACLag_PointGoal1_no-sr_seed1 (steps=500000)
+[done ] SACLag_PointGoal1_sr_seed1
+[start] SACLag_PointGoal1_no-sr_seed2 (steps=500000)
+[done ] SACLag_PointGoal1_sr_seed2
+[start] SACLag_PointButton1_sr_seed0 (steps=500000)
+[done ] SACLag_PointGoal1_no-sr_seed0
+[start] SACLag_PointButton1_sr_seed1 (steps=500000)
+[done ] SACLag_PointGoal1_no-sr_seed1
+[start] SACLag_PointButton1_sr_seed2 (steps=500000)
+[done ] SACLag_PointGoal1_no-sr_seed2
+[start] SACLag_PointButton1_no-sr_seed0 (steps=500000)
+[done ] SACLag_PointButton1_sr_seed0
+[start] SACLag_PointButton1_no-sr_seed1 (steps=500000)
+[done ] SACLag_PointButton1_sr_seed1
+[start] SACLag_PointButton1_no-sr_seed2 (steps=500000)
+[done ] SACLag_PointButton1_no-sr_seed0
+[done ] SACLag_PointButton1_sr_seed2
+[done ] SACLag_PointButton1_no-sr_seed1
+[done ] SACLag_PointButton1_no-sr_seed2
+==================================================================
+ ALL JOBS COMPLETE: 36 / 36 markers present
+ wall-clock: 29h 58m
+ next: python scripts/aggregate_results.py --base ./experiments/full
+==================================================================

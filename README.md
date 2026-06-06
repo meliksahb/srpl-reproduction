@@ -260,9 +260,9 @@ pytest -q          # 49 tests (labeling + S2C model + gradient isolation)
 ```
 
 ---
-
 ## 5. Repository layout
 
+```
 srpl-reproduction/
 ├── srpl/                          # the SRPL framework (core method)
 │   ├── labeling.py                # steps-to-cost (delta) labeling
@@ -284,6 +284,7 @@ srpl-reproduction/
 ├── figures/                       # committed results: Fig 1/4/6 PNGs + table1.md
 ├── experiments/                   # run outputs (git-ignored; copied into figures/)
 └── pyproject.toml
+```
 
 ---
 

@@ -7,14 +7,14 @@ the steps-to-cost (S2C) model, the trajectory labeling, the state augmentation,
 the OmniSafe integration, and the transfer machinery — was written from scratch
 against the paper text.
 
-> I try to implement the SRPL
-> method faithfully and validate its **algorithm-agnostic** claim on three
-> standard Lagrangian safe-RL baselines; at a **reduced compute budget** we
-> observe a **consistent training-cost (safety) reduction on the harder
-> PointButton1 task across all three algorithms** — partially reproducing the
-> paper's central safety claim — while return-side sample-efficiency gains and
-> the easier PointGoal1 task remain within noise, **consistent with the paper's
-> separation emerging over ~10x longer training**.
+**What this reproduction claims, in one sentence:** We implement the SRPL method
+faithfully and validate its **algorithm-agnostic** claim on three standard
+Lagrangian safe-RL baselines; at a **reduced compute budget** we observe a
+**consistent training-cost (safety) reduction on the harder PointButton1 task
+across all three algorithms** — partially reproducing the paper's central safety
+claim — while return-side sample-efficiency gains and the easier PointGoal1 task
+remain within noise, **consistent with the paper's separation emerging over ~10x
+longer training**.
 
 ---
 
@@ -45,6 +45,19 @@ environment that advertises the augmented observation.
 
 ## 2. Headline results
 
+**Consistency with the project proposal.** This repo delivers all four result
+types from the [submitted proposal](https://odtuclass2025s.metu.edu.tr/mod/assign/view.php?id=89959):
+the main training curves (Figure 4), the corresponding Table 1 rows, the Island
+Navigation toy (Figure 1), and the transfer experiment. One correction: the
+proposal labeled the transfer experiment "Figure 5", but in the paper **Figure 5
+is the off-policy (CSC/CVPO) results panel**, which is *not* reproduced here; the
+**transfer experiment is Figure 6**. This document uses the correct "Figure 6"
+label throughout. The compute scope was also reduced from the proposal (3 seeds
+instead of 5; ~1M/500K steps instead of 10M/2M) — see Section 3.2.
+
+Each subsection below shows the **original figure from the paper** next to **our
+reproduction**.
+
 ### 2.1 Island Navigation toy (Figure 1) — clean positive result
 
 On the Island Navigation grid-world, a DQN given **ground-truth** safety
@@ -61,6 +74,12 @@ seeds**; with GT safety it succeeds on **9 of 10**, roughly **halving cost** and
 **flipping return from negative to positive**. This is the paper's motivating
 point — *safety information lets the agent overcome early-penalty bias and
 explore the state space* — reproduced directly.
+
+*Original (paper, Figure 1):*
+
+![Paper Figure 1 (Island Navigation)](figures/paper_fig1.png)
+
+*Our reproduction:*
 
 ![Island Navigation: DQN vs DQN+GT-safety](figures/fig1_pond.png)
 
@@ -87,12 +106,13 @@ End-of-training numbers (final 10% of training, mean +/- std over 3 seeds). The
   central claim — *fewer constraint violations during learning* — reproduced
   consistently across on- and off-policy algorithms.
 - **TD3-Lag on PointButton1 is a clean dominance result**: SR achieves both
-  **higher return and lower cost** through the stable training phase (SR plateau
-  ~23 vs base ~18, final cost ~42 vs ~66).
+  **higher return and lower cost** through the stable training phase (see
+  `figures/fig4_PointButton1_TD3Lag.png`, SR plateau ~23 vs base ~18, final
+  cost ~42 vs ~66).
 - **On PointGoal1 (the easier task), the effect is within noise** — costs are
   already low, so there is little for safety information to buy, and SR is
-  slightly worse on return for PPO/TD3. Rather than
-  cherry-picking, it is more honest to present and say.
+  slightly worse on return for PPO/TD3. We report this honestly rather than
+  cherry-picking.
 - **Return-side sample-efficiency gains are not clearly visible at this budget.**
   The paper's return separation emerges over ~10M steps; we ran ~1M (on-policy) /
   500K (off-policy), so both arms are still in the pre-convergence regime
@@ -100,6 +120,12 @@ End-of-training numbers (final 10% of training, mean +/- std over 3 seeds). The
 
 The clearest result, TD3-Lag on PointButton1 — SR (blue) above base on return
 through the stable phase, and lower cost:
+
+*Original (paper, Figure 4 — main training curves):*
+
+![Paper Figure 4 (main training curves)](figures/paper_fig4.png)
+
+*Our reproduction (TD3-Lag on PointButton1; all six plots in [`figures/`](figures/)):*
 
 ![TD3-Lag on PointButton1: SR vs base](figures/fig4_PointButton1_TD3Lag.png)
 
@@ -127,6 +153,12 @@ dimensions — which is exactly what the random-init control is designed to
 isolate. **However, neither frozen-S2C condition improved over the no-S2C
 baseline** (cost 49.4) on PointGoal1, and all three conditions tie on return
 (~13.4–14.3, fully overlapping bands):
+
+*Original (paper, Figure 6 — transfer):*
+
+![Paper Figure 6 (transfer)](figures/paper_fig6.png)
+
+*Our reproduction:*
 
 ![Transfer PointButton1 to PointGoal1](figures/fig6_transfer.png)
 
@@ -260,6 +292,7 @@ pytest -q          # 49 tests (labeling + S2C model + gradient isolation)
 ```
 
 ---
+
 ## 5. Repository layout
 
 ```
@@ -300,10 +333,10 @@ pip install -e .
 pytest -q                                                            # 49 tests pass
 ```
 
-> **Note.** Training is CPU-bound (MuJoCo physics + tiny networks); a GPU is not
-> required. On this workstation each run is capped to **2 torch threads** and
-> runs **4 in parallel** — small networks train *faster* with few threads, and
-> 4x2 threads saturates the 8 physical cores without oversubscription.
+**Note.** Training is CPU-bound (MuJoCo physics + tiny networks); a GPU is not
+required. On this workstation each run is capped to **2 torch threads** and
+runs **4 in parallel** — small networks train *faster* with few threads, and
+4x2 threads saturates the 8 physical cores without oversubscription.
 
 ### Main experiment (Figure 4 + Table 1)
 
@@ -350,9 +383,9 @@ python scripts/plot_transfer.py --base ./experiments/transfer
   over all epochs, not just the end).
 - **End-of-training return/cost:** mean over the final 10% of epochs.
 
-> Note: cost-rate (cumulative window) and end-of-training cost (final-10% window)
-> measure different windows and can therefore differ in sign on the SR−Base
-> delta; both are reported and labeled distinctly.
+*Note:* cost-rate (cumulative window) and end-of-training cost (final-10% window)
+measure different windows and can therefore differ in sign on the SR−Base
+delta; both are reported and labeled distinctly.
 
 ---
 
@@ -391,5 +424,5 @@ Island Navigation follows Leike et al. (2017).
 }
 ```
 
-*Reproduction by Melikşah Beşir (CENG 502). 3 seeds; reduced horizon; PPO-Lag /
+*Reproduction by Melik\c{s}ah (CENG 502). 3 seeds; reduced horizon; PPO-Lag /
 TD3-Lag / SAC-Lag. See Section 3 for all deviations from the paper.*

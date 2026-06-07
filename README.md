@@ -424,5 +424,5 @@ Island Navigation follows Leike et al. (2017).
 }
 ```
 
-*Reproduction by Melik\c{s}ah (CENG 502). 3 seeds; reduced horizon; PPO-Lag /
+*Reproduction by Melikşah Beşir for CENG 502 course. 3 seeds; reduced horizon; PPO-Lag /
 TD3-Lag / SAC-Lag. See Section 3 for all deviations from the paper.*

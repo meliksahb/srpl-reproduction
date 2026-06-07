@@ -7,7 +7,7 @@ the steps-to-cost (S2C) model, the trajectory labeling, the state augmentation,
 the OmniSafe integration, and the transfer machinery — was written from scratch
 against the paper text.
 
-> **What this reproduction claims, in one sentence.** We implement the SRPL
+> I try to implement the SRPL
 > method faithfully and validate its **algorithm-agnostic** claim on three
 > standard Lagrangian safe-RL baselines; at a **reduced compute budget** we
 > observe a **consistent training-cost (safety) reduction on the harder
@@ -91,8 +91,8 @@ End-of-training numbers (final 10% of training, mean +/- std over 3 seeds). The
   ~23 vs base ~18, final cost ~42 vs ~66).
 - **On PointGoal1 (the easier task), the effect is within noise** — costs are
   already low, so there is little for safety information to buy, and SR is
-  slightly worse on return for PPO/TD3. We report this honestly rather than
-  cherry-picking.
+  slightly worse on return for PPO/TD3. Rather than
+  cherry-picking, it is more honest to present and say.
 - **Return-side sample-efficiency gains are not clearly visible at this budget.**
   The paper's return separation emerges over ~10M steps; we ran ~1M (on-policy) /
   500K (off-policy), so both arms are still in the pre-convergence regime
@@ -391,5 +391,5 @@ Island Navigation follows Leike et al. (2017).
 }
 ```
 
-*Reproduction by Melikşah (CENG 502). 3 seeds; reduced horizon; PPO-Lag /
+*Reproduction by Melikşah Beşir (CENG 502). 3 seeds; reduced horizon; PPO-Lag /
 TD3-Lag / SAC-Lag. See Section 3 for all deviations from the paper.*
